@@ -1,0 +1,43 @@
+name: Run Action tests
+
+on:
+  workflow_dispatch:
+  push:
+        branches:
+        - main
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+  test-get-agent-details-amd64:
+    permissions:
+      contents: read
+      packages: read
+    
+    uses: ./.github/workflows/test-get-agent-details.yaml
+    with: 
+      agent: ubuntu-latest
+
+  test-install-devcontainer-cli-amd64:
+    uses: ./.github/workflows/test-install-devcontainer-cli.yaml
+  
+  test-install-regctl-amd64:
+    permissions:
+      contents: read
+      packages: read
+    
+    uses: ./.github/workflows/test-install-regctl.yaml
+    with: 
+      env_file: ./test-artifacts/test-install-regctl/test.env
+      agent: ubuntu-latest
+
+  test-install-docker-amd64:
+    permissions:
+      contents: read
+      packages: read
+    
+    uses: ./.github/workflows/test-install-docker.yaml
+    with: 
+      VER_DOCKER_MAX: 26.1.3
+      agent: ubuntu-latest
