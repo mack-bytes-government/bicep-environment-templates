@@ -1,0 +1,33 @@
+name: 'build-package-artifact'
+description:  'Packages the artifact to the github packages registry'
+inputs:
+    artifact-path:
+      description: 'Path to the artifact to push'
+      required: true
+      type: string
+    artifact:
+      description: 'Path to the artifact to push'
+      required: true
+      type: string
+    package-name:
+      description: 'Name of the package to push'
+      required: true
+      type: string
+    package-version:
+      description: 'Version of the package to push'
+      required: true
+      type: string
+runs:
+    using: 'composite'
+    steps:
+      - name: Authenticate with GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | oras login ghcr.io -u ${{ github.actor }} --password-stdin
+        
+      - name: Push Artifact ${{ inputs.artifact }}
+        shell: bash
+        run: |
+          echo "Moving to artifact path ${{ inputs.artifact-path }}"
+          cd ${{ inputs.artifact-path }}
+          echo "Pushing artifact ${{ inputs.artifact }}"
+          oras push ${{ inputs.package-name }}:${{ inputs.package-version }} --manifest-config ${{ inputs.artifact-path }}/${{ inputs.artifact }}:application/vnd.oci.image.config.v1+json
+          echo "Pushed artifact ${{ inputs.artifact }}"

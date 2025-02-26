@@ -1,0 +1,11 @@
+name: "install-GitVersion"
+description: "Installs GitVersion for generating version numbers"
+runs:
+  using: "composite"
+  steps:
+    - name: Install Git Version
+      shell: bash
+      run: |
+        dotnet tool install --global GitVersion.Tool
+        export DOTNET_ROOT=/usr/share/dotnet
+        source ~/.bashrc
