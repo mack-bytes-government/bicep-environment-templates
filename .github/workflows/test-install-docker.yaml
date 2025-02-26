@@ -37,7 +37,7 @@ jobs:
         TOTAL_MEM=$(free -m | awk '/^Mem:/{print $2}')
         echo "Total memory: $TOTAL_MEM MB"
 
-    - uses: mack-bytes-government/bicep-environment-templates/composite-actions/install-docker@main
+    - uses: mack-bytes-government/bicep-environment-templates/composite-actions/install-docker@install-docker-latest
       with:
         VER_DOCKER_MAX: ${{ inputs.VER_DOCKER_MAX }}
 
