@@ -2,10 +2,6 @@ name: Test Installing regctl
 on: 
     workflow_call:
       inputs:
-        env_file:
-          description: 'The path to the environment file'
-          required: true
-          type: string
         agent:
           description: 'The agent to run the job on'
           required: true
@@ -20,17 +16,16 @@ jobs:
 
     - uses: mack-bytes-government/bicep-environment-templates/composite-actions/install-regctl@main
       with:
-        env_file: ${{ inputs.env_file }}
+        reg_ctl_version: "v0.8.2"
 
     - name: Validate regctl
       shell: bash
       run: |
-        source ${{ inputs.env_file }}
-
         VERSION_COMMAND_OUTPUT=$(regctl version)
         INSTALLED_VER=$(echo $VERSION_COMMAND_OUTPUT | awk '{print $2}')
 
         # Compare the installed version with the required version
+        VER_REGCTL="v0.8.2"
         if [ "$INSTALLED_VER" == "$VER_REGCTL" ]; then
             echo "Version matches"
         else
