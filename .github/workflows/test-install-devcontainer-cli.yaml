@@ -7,7 +7,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - uses: mack-bytes-government/bicep-environment-templates/composite-actions/install-devcontainer-cli@main
+    - uses: mack-bytes-government/bicep-environment-templates/composite-actions/install-devcontainer-cli@install-devcontainer-cli-latest
 
     - name: Validate Devcontainer stool installed correctly
       shell: bash
