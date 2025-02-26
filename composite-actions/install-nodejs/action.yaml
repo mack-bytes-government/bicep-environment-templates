@@ -1,0 +1,18 @@
+name: 'install-nodejs'
+description:  'Installs nodejs'
+runs:
+    using: 'composite'
+    steps:
+        - name: Install Node.js
+          uses: actions/setup-node@v3
+          with:
+            node-version: '18.20.4'
+            
+        - name: Install npms
+          shell: bash
+          run: |
+            sudo apt update
+            sudo apt install npm
+            echo ""
+            echo "npm --version"
+            npm --version

@@ -1,0 +1,46 @@
+name: 'install-dotnet'
+description:  'Installs dotnet'
+inputs:
+    dotnet-version:
+        description: 'The version of dotnet to install'
+        default: '8'
+        type: string
+runs:
+    using: 'composite'
+    steps:
+        - name: Install dotnet signing package
+          shell: bash
+          run: |
+            wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+            sudo dpkg -i packages-microsoft-prod.deb
+
+        - name: Install dependencies
+          shell: bash
+          run: |
+            sudo apt-get update
+            sudo apt-get install -y apt-transport-https
+
+        - name: Install dotnet
+          shell: bash
+          run: |
+            sudo apt-get update
+            sudo apt-get install -y dotnet${{ inputs.dotnet-version }}
+            echo ""
+            echo "dotnet --version"
+            dotnet --version
+            echo ""
+            echo "dotnet --list-runtimes"
+            dotnet --list-runtimes
+            echo ""
+            echo "dotnet --list-sdks"
+            dotnet --list-sdks
+
+        - name: Install Entity Framework
+          shell: bash
+          run: |
+            dotnet tool install --global dotnet-ef
+            dotnet tool update --global dotnet-ef
+            export DOTNET_ROOT=/usr/share/dotnet
+            source ~/.bashrc
+        
+
