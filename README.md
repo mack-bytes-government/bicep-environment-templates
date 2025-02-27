@@ -64,7 +64,21 @@ az deployment group create --resource-group $RESOURCE_GROUP_NAME --template-file
 
 ## Developer Scripts
 
-TBD
+For this repo there are several developer scripts designed to provide support for common operations. They are outlined below:
+
+### publish-bicep-to-registry.sh
+This script will publish all bicep files in a directory up to a container registry.  The goal being to facilitate using these scripts from a container registry internally.  
+
+The script is run by using the following:
+
+```bash
+FOLDER_PATH=""
+IMAGE_TAG="" # Latest or a specific version
+REGISTRY_NAME="" # The name of the registry to push to, likely "***.azurecr.us"
+IMAGE_PREFIX="" # Anything you want to name the repository between the registry name and the file name.
+
+bash ./developer-scripts/publish-bicep-to-registry.sh --folder-path $FOLDER_PATH --image-tag $IMAGE_TAG --registry-name $REGISTRY_NAME --image-prefix $IMAGE_PREFIX$
+```
 
 ## Github Composite Actions:
 
