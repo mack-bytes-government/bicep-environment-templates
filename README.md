@@ -10,11 +10,80 @@ The key elements in this repo are:
 
 ## Bicep Modules
 
-TBD
+The following are the bicep modules that have been created in this repository:
+
+- data science virtual machine: 
+- key vault: 
+- network:
+- registry: 
+- storage accounts:
+- NSGs for Subnets: 
+- Virtual machines: 
+
+## Bicep Environments:
+
+The following are environment templates designed to support common configurations.  
+
+### Deploying an Environment
+
+First this deployment requires a resource group and a virtual network to work with.  If those do not exist, run the following to stand them up.
+
+```bash
+az cloud set --name AzureUSGovernment
+```
+The following is the command to login.  
+```bash
+az login
+```
+
+Now that you have logged into azure you can use the following to deploy the code.  
+
+```bash
+RESOURCE_GROUP_NAME="test-rg"
+VNET_NAME="test-vnet"
+LOCATION="usgovvirginia"
+SUBNET_NAME="default"
+
+# Create the resource group
+az group create --name $RESOURCE_GROUP_NAME --location $LOCATION
+
+# Create the virtual network
+az network vnet create --name $VNET_NAME --resource-group $RESOURCE_GROUP_NAME --subnet-name $SUBNET_NAME
+```
+
+From here, you can deploy any template you want, for example, here's the machine learning environment template:
+
+```bash
+PROJECT_PREFIX="bicep"
+ENV_PREFIX="dev"
+DEFAULT_TAG_NAME="Environment"
+DEFAULT_TAG_VALUE="machine-learning-bicep"
+
+az deployment group create --resource-group $RESOURCE_GROUP_NAME --template-file ./environments/basic.bicep --parameters project_prefix=$PROJECT_PREFIX env_prefix=$ENV_PREFIX location=$LOCATION existing_network_name=$VNET_NAME default_tag_name=$DEFAULT_TAG_NAME default_tag_value=$DEFAULT_TAG_VALUE
+```
 
 ## Developer Scripts
 
-TBD
+For this repo there are several developer scripts designed to provide support for common operations. They are outlined below:
+
+### publish-bicep-to-registry.sh
+
+This script will publish all bicep files in a directory up to a container registry.  The goal being to facilitate using these scripts from a container registry internally.  
+
+The benefit of this being that you could take this repo, clone it and move it into a restricted environment.  
+
+For more on bicep templates that can be leveraged from registries, find documentation [here](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/quickstart-private-module-registry?tabs=azure-cli).
+
+The script is run by using the following:
+
+```bash
+FOLDER_PATH=""
+IMAGE_TAG="" # Latest or a specific version
+REGISTRY_NAME="" # The name of the registry to push to, likely "***.azurecr.us"
+IMAGE_PREFIX="" # Anything you want to name the repository between the registry name and the file name.
+
+bash ./developer-scripts/publish-bicep-to-registry.sh --folder-path $FOLDER_PATH --image-tag $IMAGE_TAG --registry-name $REGISTRY_NAME --image-prefix $IMAGE_PREFIX$
+```
 
 ## Github Composite Actions:
 
