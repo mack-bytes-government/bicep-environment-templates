@@ -67,7 +67,12 @@ az deployment group create --resource-group $RESOURCE_GROUP_NAME --template-file
 For this repo there are several developer scripts designed to provide support for common operations. They are outlined below:
 
 ### publish-bicep-to-registry.sh
+
 This script will publish all bicep files in a directory up to a container registry.  The goal being to facilitate using these scripts from a container registry internally.  
+
+The benefit of this being that you could take this repo, clone it and move it into a restricted environment.  
+
+For more on bicep templates that can be leveraged from registries, find documentation [here](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/quickstart-private-module-registry?tabs=azure-cli).
 
 The script is run by using the following:
 
