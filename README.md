@@ -10,7 +10,57 @@ The key elements in this repo are:
 
 ## Bicep Modules
 
-TBD
+The following are the bicep modules that have been created in this repository:
+
+- data science virtual machine: 
+- key vault: 
+- network:
+- registry: 
+- storage accounts:
+- NSGs for Subnets: 
+- Virtual machines: 
+
+## Bicep Environments:
+
+The following are environment templates designed to support common configurations.  
+
+### Deploying an Environment
+
+First this deployment requires a resource group and a virtual network to work with.  If those do not exist, run the following to stand them up.
+
+```bash
+az cloud set --name AzureUSGovernment
+```
+The following is the command to login.  
+```bash
+az login
+```
+
+Now that you have logged into azure you can use the following to deploy the code.  
+
+```bash
+RESOURCE_GROUP_NAME="test-rg"
+VNET_NAME="test-vnet"
+LOCATION="usgovvirginia"
+SUBNET_NAME="default"
+
+# Create the resource group
+az group create --name $RESOURCE_GROUP_NAME --location $LOCATION
+
+# Create the virtual network
+az network vnet create --name $VNET_NAME --resource-group $RESOURCE_GROUP_NAME --subnet-name $SUBNET_NAME
+```
+
+From here, you can deploy any template you want, for example, here's the machine learning environment template:
+
+```bash
+PROJECT_PREFIX="bicep"
+ENV_PREFIX="dev"
+DEFAULT_TAG_NAME="Environment"
+DEFAULT_TAG_VALUE="machine-learning-bicep"
+
+az deployment group create --resource-group $RESOURCE_GROUP_NAME --template-file ./environments/basic.bicep --parameters project_prefix=$PROJECT_PREFIX env_prefix=$ENV_PREFIX location=$LOCATION existing_network_name=$VNET_NAME default_tag_name=$DEFAULT_TAG_NAME default_tag_value=$DEFAULT_TAG_VALUE
+```
 
 ## Developer Scripts
 
