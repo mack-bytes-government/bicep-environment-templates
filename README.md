@@ -62,6 +62,25 @@ DEFAULT_TAG_VALUE="machine-learning-bicep"
 az deployment group create --resource-group $RESOURCE_GROUP_NAME --template-file ./environments/basic.bicep --parameters project_prefix=$PROJECT_PREFIX env_prefix=$ENV_PREFIX location=$LOCATION existing_network_name=$VNET_NAME default_tag_name=$DEFAULT_TAG_NAME default_tag_value=$DEFAULT_TAG_VALUE
 ```
 
+## Deploying Individual Developer Virtual Machines
+
+As part of this you can deploy a Virtual Machines that are attached to a vnet with this template.  Specifically this template enables publishing Data Science Virtual Machines because of the developer tools. The following steps can be used to deploy:
+
+```bash
+RESOURCE_GROUP_NAME="test-rg" # Existing resource group to deploy the machine to.  
+LOCATION="" # Region for deployment
+SUBNET_ID="" # The Resource ID of the subnet to attach the VM to.
+
+# Virtual Machine Details:
+VM_NAME="" # Name of the Virtual Machine
+ADMIN_USER_NAME="" # Admin Username for the machine
+DEFAULT_TAG_NAME="" # A tag name to attach.
+DEFAULT_TAG_VALUE="" # The value of the tag.
+
+az deployment group create --resource-group $RESOURCE_GROUP_NAME --template-file ./modules/virtual-machine.bicep --parameters vm_name=$VM_NAME subnet_id=$SUBNET_ID data_science_vm_type=$MACHINE_TYPE admin_user_name=$ADMIN_USER_NAME default_tag_name=$DEFAULT_TAG_NAME default_tag_value=$DEFAULT_TAG_VALUE
+```
+
+
 ## Developer Scripts
 
 For this repo there are several developer scripts designed to provide support for common operations. They are outlined below:
