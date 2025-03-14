@@ -8,7 +8,7 @@ on:
           type: string
 
 jobs:
-  test-get-agent-details:
+  test-dev-container-up:
     runs-on: ${{ inputs.agent }}
 
     steps:
