@@ -18,6 +18,15 @@ jobs:
     
     - uses: mack-bytes-government/bicep-environment-templates/composite-actions/devcontainer-up@devcontainer-up-latest
 
+    - name: Validate Container
+      shell: bash
+      run: |
+        echo "Validating the container is running"
+        echo "Container Name: bicep-environment-templates"
+        echo "Running Containers:"
+        echo "--------------------------------"
+        docker container ls
+
     - uses: mack-bytes-government/bicep-environment-templates/composite-actions/devcontainer-exec-script@21-devcontainer-actions
       with:
         workspace-folder: ${{ github.workspace }}
