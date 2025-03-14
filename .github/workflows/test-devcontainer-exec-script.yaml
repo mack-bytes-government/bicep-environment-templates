@@ -25,7 +25,7 @@ jobs:
         echo "Container Name: bicep-environment-templates"
         echo "Running Containers:"
         echo "--------------------------------"
-        docker container ls
+        docker ps --format "{{.Names}}"
 
     - uses: mack-bytes-government/bicep-environment-templates/composite-actions/devcontainer-exec-script@21-devcontainer-actions
       with:
