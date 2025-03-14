@@ -16,4 +16,4 @@ runs:
         - name: Run script inside devcontainer
           shell: bash
           run: |
-            devcontainer exec ${{ inputs.container-name }} /bin/bash -c "${{ inputs.script-path }}"
+            devcontainer exec ${{ inputs.container-name }} bash -c "${{ inputs.script-path }}"
