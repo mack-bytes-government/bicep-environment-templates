@@ -1,0 +1,26 @@
+name: test devcontainer up
+on: 
+    workflow_call:
+      inputs:
+        agent:
+          description: 'The agent to run the job on'
+          required: true
+          type: string
+
+jobs:
+  test-dev-container-up:
+    runs-on: ${{ inputs.agent }}
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: mack-bytes-government/bicep-environment-templates/composite-actions/install-devcontainer-cli@install-devcontainer-cli-latest
+    
+    - uses: mack-bytes-government/bicep-environment-templates/composite-actions/devcontainer-up@devcontainer-up-latest
+
+    - uses: mack-bytes-government/bicep-environment-templates/composite-actions/devcontainer-exec-script@21-devcontainer-actions
+      with:
+        workspace-folder: ${{ github.workspace }}
+        container-name: devcontainer
+        script-path: "./test-scripts/test-devcontainer-execute-script.sh"
+        
