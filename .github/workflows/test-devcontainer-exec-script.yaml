@@ -30,6 +30,6 @@ jobs:
     - uses: mack-bytes-government/bicep-environment-templates/composite-actions/devcontainer-exec-script@21-devcontainer-actions
       with:
         workspace-folder: ${{ github.workspace }}
-        container-name: bicep-environment-templates
+        container-name: devcontainer
         script-path: "./test-scripts/test-devcontainer-execute-script.sh"
         
