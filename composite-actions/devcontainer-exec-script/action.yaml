@@ -1,0 +1,19 @@
+
+name: 'exec-script-dev-container'
+description:  'this command runs a script inside the devcontainer'
+inputs:
+    workspace-folder:
+        description: 'The workspace folder'
+        default: "${PWD}"
+    container-name:
+        description: 'The name of the container'
+        default: "devcontainer"
+    script-path:
+        description: 'The path to the script to run'
+runs:
+    using: 'composite'
+    steps:
+        - name: Run script inside devcontainer
+          shell: bash
+          run: |
+            docker exec ${{ inputs.container-name }} /bin/bash -c "${{ inputs.script-path }}"
