@@ -1,4 +1,4 @@
-name: test devcontainer up
+name: test devcontainer exec script
 on: 
     workflow_call:
       inputs:
@@ -8,7 +8,7 @@ on:
           type: string
 
 jobs:
-  test-dev-container-up:
+  test-dev-container-exec-script:
     runs-on: ${{ inputs.agent }}
 
     steps:
