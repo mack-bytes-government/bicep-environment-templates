@@ -16,4 +16,4 @@ runs:
         - name: Run script inside devcontainer
           shell: bash
           run: |
-            devcontainer exec --workspace-folder ${{ inputs.workspace-folder }} "${{ inputs.script-path }}"
+            devcontainer exec "${{ inputs.script-path }}" --workspace-folder ${{ inputs.workspace-folder }}
