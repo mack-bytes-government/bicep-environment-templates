@@ -20,4 +20,4 @@ runs:
             echo "Container name: ${{ inputs.container-name }}"
             echo "Workspace folder: ${{ inputs.workspace-folder }}"
             echo "Running script inside devcontainer..."
-            devcontainer exec "${{ inputs.script-path }}" --workspace-folder "${{ inputs.workspace-folder }}""
+            devcontainer exec "${{ inputs.script-path }}" --workspace-folder "${{ inputs.workspace-folder }}"
