@@ -10,6 +10,24 @@ on:
       - '**'
 
 jobs:
+  test-devcontainer-exec-script-amd64:
+    permissions:
+      contents: read
+      packages: read
+    
+    uses: ./.github/workflows/test-devcontainer-exec-script.yaml
+    with: 
+      agent: ubuntu-latest
+
+  test-devcontainer-up-amd64:
+    permissions:
+      contents: read
+      packages: read
+    
+    uses: ./.github/workflows/test-devcontainer-up.yaml
+    with: 
+      agent: ubuntu-latest
+      
   test-get-agent-details-amd64:
     permissions:
       contents: read

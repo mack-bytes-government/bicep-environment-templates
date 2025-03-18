@@ -4,6 +4,9 @@ inputs:
     workspace-folder:
         description: 'The workspace folder'
         default: "${PWD}"
+    container-name:
+        description: 'The name of the container'
+        default: "devcontainer"
 runs:
     using: 'composite'
     steps:
@@ -18,5 +21,6 @@ runs:
                 --remove-existing-container \
                 --mount type=volume,source=vscode,target=/vscode,external=true \
                 --update-remote-user-uid-default on \
-                --mount-workspace-git-root true
+                --mount-workspace-git-root true \
+                --container-name ${{ inputs.container-name }} \
             echo $?

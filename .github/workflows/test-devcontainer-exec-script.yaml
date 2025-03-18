@@ -1,0 +1,35 @@
+name: test devcontainer exec script
+on: 
+    workflow_call:
+      inputs:
+        agent:
+          description: 'The agent to run the job on'
+          required: true
+          type: string
+
+jobs:
+  test-dev-container-exec-script:
+    runs-on: ${{ inputs.agent }}
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: mack-bytes-government/bicep-environment-templates/composite-actions/install-devcontainer-cli@install-devcontainer-cli-latest
+    
+    - uses: mack-bytes-government/bicep-environment-templates/composite-actions/devcontainer-up@devcontainer-up-latest
+
+    - name: Validate Container
+      shell: bash
+      run: |
+        echo "Validating the container is running"
+        echo "Container Name: bicep-environment-templates"
+        echo "Running Containers:"
+        echo "--------------------------------"
+        docker ps --format "{{.Names}}"
+
+    - uses: mack-bytes-government/bicep-environment-templates/composite-actions/devcontainer-exec-script@devcontainer-exec-script-latest
+      with:
+        workspace-folder: ${{ github.workspace }}
+        container-name: devcontainer
+        script-path: "./test-scripts/test-devcontainer-execute-script.sh"
+        
