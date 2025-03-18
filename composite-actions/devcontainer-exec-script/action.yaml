@@ -21,4 +21,4 @@ runs:
             echo "Workspace folder: ${{ inputs.workspace-folder }}"
             echo "Running script inside devcontainer..."
             echo "devcontainer exec \"${{ inputs.script-path }}\" --workspace-folder \"${{ inputs.workspace-folder }}\""
-            devcontainer exec "${{ inputs.script-path }}" --workspace-folder "${{ inputs.workspace-folder }}"
+            devcontainer exec --workspace-folder . "${{ inputs.script-path }}"
