@@ -27,7 +27,7 @@ jobs:
         echo "--------------------------------"
         docker ps --format "{{.Names}}"
 
-    - uses: mack-bytes-government/bicep-environment-templates/composite-actions/devcontainer-exec-script@21-devcontainer-actions
+    - uses: mack-bytes-government/bicep-environment-templates/composite-actions/devcontainer-exec-script@devcontainer-exec-script-latest
       with:
         workspace-folder: ${{ github.workspace }}
         container-name: devcontainer
