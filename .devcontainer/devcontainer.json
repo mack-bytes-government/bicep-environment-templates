@@ -19,7 +19,7 @@
 		"SSH_AUTH_SOCK": "/ssh-agent"
 	},
 	"forwardPorts": [],
-	"postCreateCommand": "git config --global --add safe.directory /workspaces/${localWorkspaceFolderBasename}",
+	"postCreateCommand": "mkdir -p ${env:HOME} && touch ${env:HOME}/.gitconfig && git config --global --add safe.directory /workspaces/${localWorkspaceFolderBasename}",
 	"features": {
 		"ghcr.io/devcontainers/features/azure-cli:1": {}
 	}
