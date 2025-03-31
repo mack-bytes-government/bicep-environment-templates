@@ -1,7 +1,7 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
 {
-	"name": "devcontainer",
+	"name": "Ubuntu",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	"image": "mcr.microsoft.com/devcontainers/base:jammy",
 	"settings": {
@@ -12,8 +12,8 @@
 		"ms-vscode-remote.remote-containers"
 	],
 	"mounts": [
-		"source=${env:HOME}/.gitconfig,target=/root/.gitconfig,type=bind,consistency=cached",
-		"source=${env:SSH_AUTH_SOCK},target=/ssh-agent,type=bind"
+		"source=${localEnv:HOME}/.gitconfig,target=/root/.gitconfig,type=bind,consistency=cached,required=false",
+		"source=${localEnv:SSH_AUTH_SOCK},target=/ssh-agent,type=bind"
 	],
 	"remoteEnv": {
 		"SSH_AUTH_SOCK": "/ssh-agent"
